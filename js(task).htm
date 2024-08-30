@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="p-[10px] px-[20px] flex justify-between">
+        <div>
+            <h2 class="text-3xl font-bold">Kişi işçilər</h2>
+            <input id="kisi" onchange="yaz()" type="text" class="border border-gray-300 p-2 my-[20px]" />
+            <span id="ntc1"></span>
+        </div>
+        <div>
+            <h2 class="text-3xl font-bold">Qadın işçilər</h2>
+            <input id="qadin" onchange="yaz()" type="text" class="border border-gray-300 p-2 my-[20px]" />
+            <span id="ntc2"></span>
+        </div>
+    </div>
+    <script>
+        const kisi = document.querySelector("#kisi");
+        const qadin = document.querySelector("#qadin");
+        const ntc1 = document.querySelector("#ntc1");
+        const ntc2 = document.querySelector("#ntc2");
+
+        let arr = [
+            { ad: 'Elvin', sex: 'm', salary: 4500 },
+            { ad: 'Xəzər', sex: 'm', salary: 4270 },
+            { ad: 'Elmir', sex: 'm', salary: 3550 },
+            { ad: 'İsmixan', sex: 'm', salary: 2700 },
+            { ad: 'Günel', sex: 'f', salary: 1740 },
+            { ad: 'Günəş', sex: 'f', salary: 2400 },
+            { ad: 'Fidan', sex: 'f', salary: 820 },
+            { ad: 'Rəvan', sex: 'm', salary: 700 },
+            { ad: 'Kənan', sex: 'm', salary: 2340 },
+            { ad: 'Azər', sex: 'm', salary: 1400 },
+            { ad: 'Musa', sex: 'm', salary: 2350 },
+            { ad: 'Vahid', sex: 'm', salary: 3340 },
+            { ad: 'David', sex: 'm', salary: 4700 },
+            { ad: 'Elcan', sex: 'm', salary: 1100 },
+            { ad: 'Yasəmən', sex: 'f', salary: 900 },
+        ];
+
+        function yaz() {
+            const kisiVal = kisi.value.toLowerCase();
+            const qadinVal = qadin.value.toLowerCase();
+
+            ntc1.innerHTML = "";
+            ntc2.innerHTML = ""; 
+
+            let kisiFound = false;
+            let qadinFound = false;
+
+            arr.forEach(function (item) {
+                const salary = item.salary.toString();
+                const toplu = item.ad.toLowerCase() + salary;
+
+                if (item.sex === 'f' && toplu.includes(qadinVal)) {
+                    ntc2.innerHTML += `<p>${item.ad}, ${item.salary}</p>`;
+                    qadinFound = true;
+                }
+                if (item.sex === 'm' && toplu.includes(kisiVal)) {
+                    ntc1.innerHTML += `<p>${item.ad}, ${item.salary}</p>`;
+                    kisiFound = true;
+                }
+            });
+
+            if (!kisiFound && kisiVal !== '') {
+                ntc1.innerHTML = '<p>Tapılmadı</p>';
+            }
+            if (!qadinFound && qadinVal !== '') {
+                ntc2.innerHTML = '<p>Tapılmadı</p>';
+            }
+        }
+        
+    </script>
+</body>
+
+</html>
